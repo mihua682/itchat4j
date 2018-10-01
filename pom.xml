@@ -166,4 +166,31 @@
       
     </plugins>
   </build>
+     <repositories>
+        <repository>
+            <id>nexus103</id>
+            <name>nexus103</name>
+            <url>http://10.185.240.103:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus103</id>
+            <name>nexus103</name>
+            <url>http://10.185.240.103:8081/nexus/content/groups/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>releases</name>
+            <url>http://10.185.240.103:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>snapshots</name>
+            <url>http://10.185.240.103:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+  
 </project>
