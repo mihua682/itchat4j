@@ -1,7 +1,10 @@
 package cn.zhouyafeng.itchat4j.service.impl;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +15,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.regex.Matcher;
+
+import javax.imageio.ImageIO;
 
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
@@ -41,6 +46,9 @@ import cn.zhouyafeng.itchat4j.utils.enums.parameters.LoginParaEnum;
 import cn.zhouyafeng.itchat4j.utils.enums.parameters.StatusNotifyParaEnum;
 import cn.zhouyafeng.itchat4j.utils.enums.parameters.UUIDParaEnum;
 import cn.zhouyafeng.itchat4j.utils.tools.CommonTools;
+import extend.ImgUtil;
+import extend.PrintQRChar;
+import extend.QRUtil;
 
 /**
  * 登陆服务实现类
@@ -152,6 +160,28 @@ public class LoginServiceImpl implements ILoginService {
 
 		return true;
 	}
+	public boolean getQRTerminal() {
+		String qrUrl = URLEnum.QRCODE_URL.getUrl() + core.getUuid();
+		HttpEntity entity = myHttpClient.doGet(qrUrl, null, true, null);
+		try {
+			byte[] bytes = EntityUtils.toByteArray(entity);
+			QRUtil.printQR(bytes);
+		} catch (Exception e) {
+			LOG.info(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	public boolean getQR(String qrPath,boolean isTerminal) {
+		if(isTerminal){
+			//getQR(qrPath);
+			return getQRTerminal();
+			
+		}
+		else{
+			return getQR(qrPath);
+		}
+	}
 
 	@Override
 	public boolean webWxInit() {
@@ -251,7 +281,7 @@ public class LoginServiceImpl implements ILoginService {
 				while (core.isAlive()) {
 					try {
 						Map<String, String> resultMap = syncCheck();
-						LOG.info(JSONObject.toJSONString(resultMap));
+//						LOG.info(JSONObject.toJSONString(resultMap));
 						String retcode = resultMap.get("retcode");
 						String selector = resultMap.get("selector");
 						if (retcode.equals(RetCodeEnum.UNKOWN.getCode())) {

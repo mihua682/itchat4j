@@ -132,6 +132,24 @@ public class MyHttpClient {
 	 * @param params
 	 * @return
 	 */
+	public HttpEntity doPost(String url, List<BasicNameValuePair> params) {
+		HttpEntity entity = null;
+		HttpPost httpPost = new HttpPost();
+		try {
+			UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(params, "UTF-8");  
+			httpPost = new HttpPost(url);
+			httpPost.setEntity(uefEntity);
+			httpPost.setHeader("User-Agent", Config.USER_AGENT);
+			CloseableHttpResponse response = httpClient.execute(httpPost);
+			entity = response.getEntity();
+		} catch (ClientProtocolException e) {
+			logger.info(e.getMessage());
+		} catch (IOException e) {
+			logger.info(e.getMessage());
+		}
+
+		return entity;
+	}
 	public HttpEntity doPost(String url, String paramsStr) {
 		HttpEntity entity = null;
 		HttpPost httpPost = new HttpPost();
@@ -151,7 +169,6 @@ public class MyHttpClient {
 
 		return entity;
 	}
-
 	/**
 	 * 上传文件到服务器
 	 * 

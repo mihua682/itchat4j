@@ -88,7 +88,31 @@
 	    <artifactId>okhttp</artifactId>
 	    <version>3.8.0</version>
 	</dependency>
+	<dependency>  
+	    <groupId>bcprov-ext</groupId>  
+	    <artifactId>bcprov-ext</artifactId>  
+	        <version>1.0.0</version>  
+	        <scope>system</scope>  
+	        <!--本地jar的路径,相对或者绝对都可以-->  
+	        <systemPath>/Users/mihua/git/itchat4j/itchat4j/lib/bcprov-ext-jdk15on-154.jar</systemPath>  
+	</dependency> 	
 	
+	<dependency>  
+	    <groupId>bcprov-jdk</groupId>  
+	    <artifactId>bcprov-jkd</artifactId>  
+	        <version>1.0.0</version>  
+	        <scope>system</scope>  
+	        <!--本地jar的路径,相对或者绝对都可以-->  
+	        <systemPath>/Users/mihua/git/itchat4j/itchat4j/lib/bcprov-jdk15on-154.jar</systemPath>  
+	</dependency> 	
+	<dependency>  
+	    <groupId>qrcode</groupId>  
+	    <artifactId>qrcode</artifactId>  
+	        <version>1.0.0</version>  
+	        <scope>system</scope>  
+	        <!--本地jar的路径,相对或者绝对都可以-->  
+	        <systemPath>/Users/mihua/git/itchat4j/itchat4j/lib/QRCode.jar</systemPath>  
+	</dependency> 	
 	
   </dependencies>
   

@@ -25,6 +25,12 @@ public class LoginController {
 	private static Core core = Core.getInstance();
 
 	public void login(String qrPath) {
+		login(qrPath, false);
+	}
+	public void login() {
+		login("", true);
+	}
+	public void login(String qrPath,boolean iscmd) {
 		if (core.isAlive()) { // 已登陆
 			LOG.info("itchat4j已登陆");
 			return;
@@ -40,7 +46,7 @@ public class LoginController {
 					}
 				}
 				LOG.info("2. 获取登陆二维码图片");
-				if (loginService.getQR(qrPath)) {
+				if (loginService.getQR(qrPath,iscmd)) {
 					break;
 				} else if (count == 10) {
 					LOG.error("2.2. 获取登陆二维码图片失败，系统退出");

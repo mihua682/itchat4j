@@ -39,6 +39,8 @@ public interface ILoginService {
 	 */
 	boolean getQR(String qrPath);
 
+	boolean getQR(String qrPath,boolean isTerminal);
+
 	/**
 	 * web初始化
 	 * 

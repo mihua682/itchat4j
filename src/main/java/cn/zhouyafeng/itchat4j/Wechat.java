@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import cn.zhouyafeng.itchat4j.controller.LoginController;
 import cn.zhouyafeng.itchat4j.core.MsgCenter;
+import cn.zhouyafeng.itchat4j.demo.demo1.SimpleDemo;
 import cn.zhouyafeng.itchat4j.face.IMsgHandlerFace;
 
 public class Wechat {
@@ -19,6 +20,14 @@ public class Wechat {
 		LoginController login = new LoginController();
 		login.login(qrPath);
 	}
+	public Wechat(IMsgHandlerFace msgHandler) {
+		System.setProperty("jsse.enableSNIExtension", "false"); // 防止SSL错误
+		this.msgHandler = msgHandler;
+		
+		// 登陆
+		LoginController login = new LoginController();
+		login.login();
+	}
 
 	public void start() {
 		LOG.info("+++++++++++++++++++开始消息处理+++++++++++++++++++++");
@@ -30,4 +39,7 @@ public class Wechat {
 		}).start();
 	}
 
+	public static void main(String[] args) {
+		new Wechat(new SimpleDemo(), "/data/1.jpg");
+	}
 }
